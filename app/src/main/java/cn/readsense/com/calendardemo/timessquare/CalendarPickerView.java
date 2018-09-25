@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -938,18 +939,18 @@ public class CalendarPickerView extends ListView {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            MonthView monthView = (MonthView) convertView;
-            if (monthView == null //
-                    || !monthView.getTag(R.id.day_view_adapter_class).equals(dayViewAdapter.getClass())) {
-                monthView =
-                        MonthView.create(mContext, parent, inflater, weekdayNameFormat, listener, today, dividerColor,
-                                dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader,
-                                headerTextColor, displayDayNamesHeaderRow, displayAlwaysDigitNumbers,
-                                decorators, locale, dayViewAdapter);
-                monthView.setTag(R.id.day_view_adapter_class, dayViewAdapter.getClass());
+            MonthView monthView = null;
+            if (monthView == null) {
+                monthView = MonthView.create(mContext, parent, inflater, weekdayNameFormat, listener, today, dividerColor,
+                        dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader,
+                        headerTextColor, displayDayNamesHeaderRow, displayAlwaysDigitNumbers,
+                        decorators, locale, dayViewAdapter);
+                //monthView.setTag(R.id.day_view_adapter_class, dayViewAdapter.getClass());
             } else {
+                monthView = (MonthView) convertView;
                 monthView.setDecorators(decorators);
             }
+
             if (monthsReverseOrder) {
                 position = months.size() - position - 1;
             }
