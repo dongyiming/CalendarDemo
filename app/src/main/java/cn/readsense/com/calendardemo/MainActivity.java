@@ -15,7 +15,12 @@ import android.widget.ImageView;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * @description: TODO
+ * @author: dongyiming
+ * @date: 2018/9/25 1:08
+ * @version: v1.0
+ */
 public class MainActivity extends AppCompatActivity implements BindActivityCallBack<String>, View.OnClickListener {
 
     private TabLayout tablayout_top;
