@@ -27,7 +27,7 @@ public class StartActivity extends AppCompatActivity {
 
         time1 = (TextView) findViewById(R.id.time1);
         time2 = (TextView) findViewById(R.id.time2);
-        TextView btn = (Button) findViewById(R.id.btn);
+        Button btn = (Button) findViewById(R.id.btn);
         time1.setText("2018年6月15日");
         time2.setText("2018年7月19日");
         btn.setOnClickListener(new View.OnClickListener() {
