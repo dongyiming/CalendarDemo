@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="common_sz_13">13sp</dimen>
+
+    <!--********************************！CalendarActivity界面尺寸*********************************-->
+    <!--title-->
+    <dimen name="dimen_title_height">34.3dp</dimen>
+    <dimen name="dimen_arrow_margin_left">7.7dp</dimen>
+    <dimen name="dimen_title_textsize">16.3sp</dimen>
+
+    <!-- tablayout距离-->
+    <dimen name="dimen_tablayout_height">57.7dp</dimen>
+    <dimen name="dimen_margin_left">15.3dp</dimen>
+    <dimen name="dimen_margin_top">9.6dp</dimen>
+    <dimen name="dimen_margin_bottom">9.6dp</dimen>
+    <dimen name="dimen_indicator_height">4dp</dimen>
+
+    <!-- week-->
+    <dimen name="dimen_week_height">30.7dp</dimen>
+    <dimen name="dimen_week_text_size">12.3sp</dimen>
+    <!-- year/month-->
+    <dimen name="dimen_month_height">30.7dp</dimen>
+    <dimen name="dimen_month_text_size">14.3sp</dimen>
+    <!-- day-->
+    <dimen name="dimen_day_height">53.7dp</dimen>
+    <dimen name="dimen_day_text_size">16.3sp</dimen>
+    <dimen name="dimen_day_marginleft">0dp</dimen>
+    <dimen name="dimen_day_marginright">0dp</dimen>
+    <!--divider-->
+    <dimen name="dimen_divider_height">0.3dp</dimen>
+
+    <!--********************************CalendarActivity界面尺寸！*********************************-->
+
+    <dimen name="calendar_day_headers_paddingbottom">4dp</dimen>
+    <dimen name="calendar_month_topmargin">16dp</dimen>
+    <dimen name="calendar_month_title_bottommargin">4dp</dimen>
+    <dimen name="calendar_text_medium">18sp</dimen>
+    <dimen name="calendar_text_small">14sp</dimen>
+</resources>

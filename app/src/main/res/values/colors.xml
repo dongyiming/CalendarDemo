@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--标准白色背景-->
+    <color name="color_white">#ffffff</color>
+
+    <!--********************************！CalendarActivity界面颜色*********************************-->
+    <!-- 状态栏和toptitl背景色-->
+    <color name="color_title_bg">#547CD3</color>
+    <color name="color_title_text">#ffffff</color>
+
+    <!-- tablayout字体颜色-->
+    <color name="color_time_value">#262626</color>
+    <color name="color_time_type">#979797</color>
+    <color name="color_tablayout_bg">#ffffff</color>
+
+    <!-- week bg   (日一二)-->
+    <color name="color_week_bg">#f1f3f7</color>
+    <color name="color_week_text">#232424</color>
+
+    <!--Year/Month (2018年9月)-->
+    <color name="color_month_text">#212121</color>
+    <color name="color_month_bg">#dedfe3</color>
+
+    <!--day (1号)-->
+    <color name="color_day_null_bg">#f7f7f7</color>
+    <color name="color_day_bg">#ffffff</color>
+    <color name="color_day_text">#262626</color>
+    <color name="color_day_current_bg">#547cd3</color>
+    <color name="color_day_current_text">#ffffff</color>
+    <color name="color_day_selected_bg">#ffffff</color>
+    <color name="color_day_selected_text">#ffffff</color>
+
+    <!--divider-->
+    <color name="color_divider">#e5e5e5</color>
+    <!--********************************CalendarActivity界面颜色！*********************************-->
+
+    <!--******************************！android-times-square界面颜色*******************************-->
+    <!--all-->
+    <color name="calendar_active_month_bg">#fff5f7f9</color>
+    <color name="calendar_bg">#ffffffff</color>
+    <color name="calendar_divider">#ffbababa</color>
+    <color name="calendar_inactive_month_bg">#ffd7d9db</color>
+    <color name="calendar_selected_day_bg">#ff379bff</color>
+    <color name="calendar_highlighted_day_bg">#ccffcc</color>
+    <color name="calendar_selected_range_bg">#ff96caff</color>
+    <color name="calendar_text_inactive">#40778088</color>
+    <color name="calendar_text_active">#ff778088</color>
+    <color name="calendar_text_selected">#ffffffff</color>
+    <color name="calendar_text_unselectable">#7f778088</color>
+    <color name="calendar_text_highlighted">#ff778088</color>
+    <!--******************************！android-times-square界面颜色*******************************-->
+</resources>

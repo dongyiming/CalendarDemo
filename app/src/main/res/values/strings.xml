@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">CalendarDemo</string>
+
+
+    <string name="str_title_text">选择指定和比对时间</string>
+    <string name="str_week_monday">一</string>
+    <string name="str_week_tuesday">二</string>
+    <string name="str_week_wednesday">三</string>
+    <string name="str_week_thursday">四</string>
+    <string name="str_week_friday">五</string>
+    <string name="str_week_saturday">六</string>
+    <string name="str_week_sunday">日</string>
+
+    <string name="day_name_format">EEE</string>
+    <string name="invalid_date">Date must be between %1$s and %2$s.</string>
+    <string name="month_name_format">MMMM yyyy</string>
+    <string name="month_only_name_format">MMMM</string>
+    <string name="year_only_format">yyyy</string>
+</resources>
