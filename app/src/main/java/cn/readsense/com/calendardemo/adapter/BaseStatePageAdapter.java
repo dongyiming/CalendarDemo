@@ -1,4 +1,4 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +15,7 @@ public abstract class BaseStatePageAdapter extends FragmentStatePagerAdapter {
 
     private String[] titles;
 
-    public BaseStatePageAdapter(FragmentManager fm, String[] titles) {
+    protected BaseStatePageAdapter(FragmentManager fm, String[] titles) {
         super(fm);
         this.titles = titles;
     }

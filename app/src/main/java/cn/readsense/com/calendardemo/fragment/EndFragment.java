@@ -1,10 +1,12 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import cn.readsense.com.calendardemo.BindActivityCallBack;
 
 /**
  * @description: <比对时间>
@@ -14,13 +16,13 @@ import java.util.Date;
  */
 public class EndFragment extends BaseCalendarFragment {
 
-    private BindActivityCallBack callBack;
+    private BindActivityCallBack<Date> callBack;
     private String endTime;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        callBack = (BindActivityCallBack<String>) getActivity();
+        callBack = (BindActivityCallBack<Date>) getActivity();
         endTime = ((Activity) context).getIntent().getStringExtra("endTime");
     }
 
@@ -30,8 +32,9 @@ public class EndFragment extends BaseCalendarFragment {
     }
 
     @Override
-    public void invoke(Date date) {
-        callBack.call(new SimpleDateFormat("yyyy年MM月dd日").format(date), false);
+    public void invoke(List<Date> dates) {
+
+        callBack.call(dates, 1);
     }
 }
 

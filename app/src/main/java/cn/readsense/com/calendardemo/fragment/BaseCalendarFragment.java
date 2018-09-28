@@ -1,4 +1,4 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import cn.readsense.com.calendardemo.CalendarView;
+import cn.readsense.com.calendardemo.R;
+import cn.readsense.com.calendardemo.core.CalendarController;
 import cn.readsense.com.calendardemo.timessquare.CalendarPickerView;
 
 /**
@@ -23,15 +28,14 @@ import cn.readsense.com.calendardemo.timessquare.CalendarPickerView;
 public abstract class BaseCalendarFragment extends Fragment implements CalendarView {
 
     private CalendarPickerView calendar_view;
-    private CalendarController calendarController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_calendar, null);
-        calendar_view = (CalendarPickerView) view.findViewById(R.id.calendar_view);
-        calendarController = new CalendarController(getActivity(), this);
+        calendar_view = view.findViewById(R.id.calendar_view);
+        CalendarController calendarController = new CalendarController(getActivity(), this);
         calendarController.initTime(getCompareTime());
         return view;
     }
@@ -39,23 +43,21 @@ public abstract class BaseCalendarFragment extends Fragment implements CalendarV
     @Override
     public void initTime(@NotNull Date startDate, @NotNull Date endDate, @NotNull Date selectedDate) {
 
-        calendar_view.init(startDate, endDate).withSelectedDate(selectedDate);
-        calendar_view.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
-
+        List<Date> dates = new ArrayList<>();
+        dates.add(new Date("2018/6/13"));
+        dates.add(new Date("2018/6/16"));
+        calendar_view.init(startDate, endDate).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates);
+        //当范围选择成功后才回调数据，返回两次的数据
+        calendar_view.setOnRangeDateSelectedListener(new CalendarPickerView.OnRangeDateSelectedListener() {
             @Override
-            public void onDateSelected(Date date) {
-                invoke(date);
-            }
-
-            @Override
-            public void onDateUnselected(Date date) {
-
+            public void onDateSelected(List<Date> dates) {
+                invoke(dates);
             }
         });
     }
 
     public abstract String getCompareTime();
 
-    public abstract void invoke(Date date);
+    public abstract void invoke(List<Date> dates);
 }
 

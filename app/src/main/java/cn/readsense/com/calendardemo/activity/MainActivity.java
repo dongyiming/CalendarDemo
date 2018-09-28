@@ -1,5 +1,6 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import cn.readsense.com.calendardemo.BindActivityCallBack;
+import cn.readsense.com.calendardemo.R;
+import cn.readsense.com.calendardemo.adapter.BaseStatePageAdapter;
+import cn.readsense.com.calendardemo.fragment.BaseCalendarFragment;
+import cn.readsense.com.calendardemo.fragment.EndFragment;
+import cn.readsense.com.calendardemo.fragment.StartFragment;
+import cn.readsense.com.calendardemo.utils.BarUtils;
 
 /**
  * @description: TODO
@@ -21,25 +36,38 @@ import java.util.Map;
  * @date: 2018/9/25 1:08
  * @version: v1.0
  */
-public class MainActivity extends AppCompatActivity implements BindActivityCallBack<String>, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements BindActivityCallBack<Date>, View.OnClickListener {
 
     private TabLayout tablayout_top;
-    private ViewPager viewpager;
-    private BaseStatePageAdapter mAdapter;
     private String startTime;
     private String endTime;
+    @SuppressLint("UseSparseArrays")
     public static Map<Integer, BaseCalendarFragment> fragments = new HashMap<>();
-    private ImageView backImg;
+    private ViewPager viewpager;
 
     @Override
-    public void call(String time, boolean flag) {
+    public void call(@NotNull List<? extends Date> list, int ref) {
 
-        if (flag) {
-            startTime = time;
-            tablayout_top.getTabAt(0).setText(time);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            String time = new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA).format(list.get(i));
+            if (i > 0) {
+                stringBuilder.append(" - ").append(time);
+            } else {
+                stringBuilder.append(time);
+            }
+        }
+        TabLayout.Tab tabView = tablayout_top.getTabAt(ref);
+        if (ref == 0) {
+            startTime = stringBuilder.toString();
+            if (tabView != null)
+                tabView.setText(startTime);
+            viewpager.setCurrentItem(1, false);
         } else {
-            endTime = time;
-            tablayout_top.getTabAt(1).setText(time);
+            endTime = stringBuilder.toString();
+            if (tabView != null)
+                tabView.setText(endTime);
+            setResult();
         }
     }
 
@@ -50,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
         init();
         //设置状态栏透明度为0，及背景色，需要依赖AndroidUtilCode框架
         BarUtils.setStatusBarColor(this, this.getResources().getColor(R.color.color_title_bg));
-        //BarUtils.setStatusBarAlpha(this);
     }
 
     /**
@@ -67,13 +94,13 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
         startTime = getIntent().getStringExtra("startTime");
         endTime = getIntent().getStringExtra("endTime");
 
-        tablayout_top = (TabLayout) findViewById(R.id.tablayout_top);
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
-        backImg = (ImageView) findViewById(R.id.img_back);
+        tablayout_top = findViewById(R.id.tablayout_top);
+        viewpager = findViewById(R.id.viewpager);
+        ImageView backImg = findViewById(R.id.img_back);
         backImg.setOnClickListener(this);
 
         String[] titles = new String[]{startTime, endTime};
-        mAdapter = new BaseStatePageAdapter(this.getSupportFragmentManager(), titles) {
+        BaseStatePageAdapter mAdapter = new BaseStatePageAdapter(this.getSupportFragmentManager(), titles) {
             @Override
             public Fragment getItemFragment(int position) {
                 return buildItemFragment(position);
@@ -132,12 +159,16 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
 
         switch (view.getId()) {
             case R.id.img_back:
-                Intent intent = new Intent();
-                intent.putExtra("startTime", startTime);
-                intent.putExtra("endTime", endTime);
-                setResult(1, intent);
-                finish();
+                setResult();
         }
+    }
 
+    public void setResult() {
+
+        Intent intent = new Intent();
+        intent.putExtra("startTime", startTime);
+        intent.putExtra("endTime", endTime);
+        setResult(1, intent);
+        finish();
     }
 }

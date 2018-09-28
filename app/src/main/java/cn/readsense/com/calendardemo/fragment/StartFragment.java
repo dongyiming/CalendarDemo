@@ -1,10 +1,12 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import cn.readsense.com.calendardemo.BindActivityCallBack;
 
 /**
  * @description: <指定时间>
@@ -14,14 +16,14 @@ import java.util.Date;
  */
 public class StartFragment extends BaseCalendarFragment {
 
-    private BindActivityCallBack callBack;
+    private BindActivityCallBack<Date> callBack;
     private String startTime;
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        callBack = (BindActivityCallBack<String>) getActivity();
+        callBack = (BindActivityCallBack) getActivity();
         startTime = ((Activity) context).getIntent().getStringExtra("startTime");
     }
 
@@ -31,7 +33,8 @@ public class StartFragment extends BaseCalendarFragment {
     }
 
     @Override
-    public void invoke(Date date) {
-        callBack.call(new SimpleDateFormat("yyyy年MM月dd日").format(date), true);
+    public void invoke(List<Date> dates) {
+        //callBack.call(new SimpleDateFormat("yyyy年MM月dd日").format(date), true);
+        callBack.call(dates, 0);
     }
 }

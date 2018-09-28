@@ -33,6 +33,7 @@
     <color name="color_day_current_text">#ffffff</color>
     <color name="color_day_selected_bg">#ffffff</color>
     <color name="color_day_selected_text">#ffffff</color>
+    <color name="color_day_range_selected_bg">#dde5f6</color>
 
     <!--divider-->
     <color name="color_divider">#e5e5e5</color>

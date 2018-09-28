@@ -2,7 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item app:tsquare_state_range_middle="true">
-        <color android:color="@color/calendar_selected_range_bg" />
+        <color android:color="@color/color_day_range_selected_bg" />
     </item>
     <item android:state_selected="true">
         <color android:color="@color/color_day_current_bg" />

@@ -9,27 +9,28 @@ import android.widget.TextView;
 
 import cn.readsense.com.calendardemo.R;
 
+
 public class CalendarCellView extends FrameLayout {
   private static final int[] STATE_SELECTABLE = {
-      R.attr.tsquare_state_selectable
+          R.attr.tsquare_state_selectable
   };
   private static final int[] STATE_CURRENT_MONTH = {
-      R.attr.tsquare_state_current_month
+          R.attr.tsquare_state_current_month
   };
   private static final int[] STATE_TODAY = {
-      R.attr.tsquare_state_today
+          R.attr.tsquare_state_today
   };
   private static final int[] STATE_HIGHLIGHTED = {
-      R.attr.tsquare_state_highlighted
+          R.attr.tsquare_state_highlighted
   };
   private static final int[] STATE_RANGE_FIRST = {
-      R.attr.tsquare_state_range_first
+          R.attr.tsquare_state_range_first
   };
   private static final int[] STATE_RANGE_MIDDLE = {
-      R.attr.tsquare_state_range_middle
+          R.attr.tsquare_state_range_middle
   };
   private static final int[] STATE_RANGE_LAST = {
-      R.attr.tsquare_state_range_last
+          R.attr.tsquare_state_range_last
   };
 
   private boolean isSelectable = false;

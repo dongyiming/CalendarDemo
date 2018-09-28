@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -81,6 +80,7 @@ public class CalendarPickerView extends ListView {
     final List<MonthCellDescriptor> selectedCells = new ArrayList<>();
     final List<MonthCellDescriptor> highlightedCells = new ArrayList<>();
     final List<Calendar> selectedCals = new ArrayList<>();
+    final List<Date> rangeDates = new ArrayList<>();
     final List<Calendar> highlightedCals = new ArrayList<>();
     private Locale locale;
     private TimeZone timeZone;
@@ -370,6 +370,7 @@ public class CalendarPickerView extends ListView {
          * visible.
          */
         public FluentInitializer withSelectedDate(Date selectedDates) {
+            rangeDates.add(selectedDates);
             return withSelectedDates(Collections.singletonList(selectedDates));
         }
 
@@ -731,8 +732,12 @@ public class CalendarPickerView extends ListView {
                 if (selectedCals.size() > 1) {
                     // We've already got a range selected: clear the old one.
                     clearOldSelections();
+                    //新时间比旧得时间之前
                 } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
                     // We're moving the start of the range back in time: clear the old start date.
+                    if (rangeListener != null) {
+                        rangeDates.clear();
+                    }
                     clearOldSelections();
                 }
                 break;
@@ -755,6 +760,19 @@ public class CalendarPickerView extends ListView {
                 cell.setSelected(true);
             }
             selectedCals.add(newlySelectedCal);
+
+            if (rangeListener != null) {
+                if (!rangeDates.isEmpty()) {
+                    if (!rangeDates.get(0).equals(cell.getDate()) && rangeDates.size() != 2) {
+                        rangeDates.add(cell.getDate());
+                    }
+                    rangeListener.onDateSelected(rangeDates);
+                    rangeDates.clear();
+                } else {
+                    rangeDates.add(cell.getDate());
+                }
+
+            }
 
             if (selectionMode == SelectionMode.RANGE && selectedCells.size() > 1) {
                 // Select all days in between start and end.
@@ -799,11 +817,10 @@ public class CalendarPickerView extends ListView {
         for (MonthCellDescriptor selectedCell : selectedCells) {
             // De-select the currently-selected cell.
             selectedCell.setSelected(false);
-
             if (dateListener != null) {
                 Date selectedDate = selectedCell.getDate();
-
                 if (selectionMode == SelectionMode.RANGE) {
+
                     int index = selectedCells.indexOf(selectedCell);
                     if (index == 0 || index == selectedCells.size() - 1) {
                         dateListener.onDateUnselected(selectedDate);
@@ -1075,6 +1092,21 @@ public class CalendarPickerView extends ListView {
     }
 
     /**
+     * <TODO>
+     *
+     * @param:
+     * @return:
+     * @author: dongyiming
+     * @date: 2018/9/28 18:11
+     * @version: v1.0
+     */
+    private OnRangeDateSelectedListener rangeListener;
+
+    public void setOnRangeDateSelectedListener(OnRangeDateSelectedListener rangeListener) {
+        this.rangeListener = rangeListener;
+    }
+
+    /**
      * Set a listener to react to user selection of a disabled date.
      *
      * @param listener the listener to set, or null for no reaction
@@ -1125,6 +1157,19 @@ public class CalendarPickerView extends ListView {
         void onDateSelected(Date date);
 
         void onDateUnselected(Date date);
+    }
+
+    /**
+     * <TODO>
+     *
+     * @param:
+     * @return:
+     * @author: dongyiming
+     * @date: 2018/9/28 18:11
+     * @version: v1.0
+     */
+    public interface OnRangeDateSelectedListener {
+        void onDateSelected(List<Date> dates);
     }
 
     /**

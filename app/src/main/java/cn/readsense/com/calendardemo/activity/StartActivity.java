@@ -1,4 +1,4 @@
-package cn.readsense.com.calendardemo;
+package cn.readsense.com.calendardemo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import cn.readsense.com.calendardemo.R;
 
 /**
  * @description: TODO
@@ -28,8 +30,8 @@ public class StartActivity extends AppCompatActivity {
         time1 = (TextView) findViewById(R.id.time1);
         time2 = (TextView) findViewById(R.id.time2);
         Button btn = (Button) findViewById(R.id.btn);
-        time1.setText("2018年6月15日");
-        time2.setText("2018年7月19日");
+        time1.setText("2018/6/15");
+        time2.setText("2018/7/19");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
