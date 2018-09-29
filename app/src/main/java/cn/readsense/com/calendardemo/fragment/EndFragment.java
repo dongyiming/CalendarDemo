@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.Date;
 import java.util.List;
 
-import cn.readsense.com.calendardemo.BindActivityCallBack;
+import cn.readsense.com.calendardemo.service.BindActivityCallBack;
 
 /**
  * @description: <比对时间>

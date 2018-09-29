@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.Date;
 import java.util.List;
 
-import cn.readsense.com.calendardemo.BindActivityCallBack;
+import cn.readsense.com.calendardemo.service.BindActivityCallBack;
 
 /**
  * @description: <指定时间>
@@ -34,7 +34,6 @@ public class StartFragment extends BaseCalendarFragment {
 
     @Override
     public void invoke(List<Date> dates) {
-        //callBack.call(new SimpleDateFormat("yyyy年MM月dd日").format(date), true);
         callBack.call(dates, 0);
     }
 }

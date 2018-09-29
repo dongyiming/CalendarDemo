@@ -370,7 +370,6 @@ public class CalendarPickerView extends ListView {
          * visible.
          */
         public FluentInitializer withSelectedDate(Date selectedDates) {
-            rangeDates.add(selectedDates);
             return withSelectedDates(Collections.singletonList(selectedDates));
         }
 
@@ -389,6 +388,7 @@ public class CalendarPickerView extends ListView {
             if (selectedDates != null) {
                 for (Date date : selectedDates) {
                     selectDate(date);
+                    rangeDates.add(date);
                 }
             }
             scrollToSelectedDates();
@@ -731,6 +731,9 @@ public class CalendarPickerView extends ListView {
             case RANGE:
                 if (selectedCals.size() > 1) {
                     // We've already got a range selected: clear the old one.
+                    if (rangeListener != null) {
+                        rangeDates.clear();
+                    }
                     clearOldSelections();
                     //新时间比旧得时间之前
                 } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {

@@ -8,15 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cn.readsense.com.calendardemo.CalendarView;
 import cn.readsense.com.calendardemo.R;
 import cn.readsense.com.calendardemo.core.CalendarController;
+import cn.readsense.com.calendardemo.service.CalendarView;
 import cn.readsense.com.calendardemo.timessquare.CalendarPickerView;
 
 /**
@@ -41,12 +38,14 @@ public abstract class BaseCalendarFragment extends Fragment implements CalendarV
     }
 
     @Override
-    public void initTime(@NotNull Date startDate, @NotNull Date endDate, @NotNull Date selectedDate) {
+    public void initTime(Date startDate, Date endDate, List<Date> selectedDates, boolean isTimePeriod) {
 
-        List<Date> dates = new ArrayList<>();
-        dates.add(new Date("2018/6/13"));
-        dates.add(new Date("2018/6/16"));
-        calendar_view.init(startDate, endDate).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(dates);
+        //是否是时间段
+        if (isTimePeriod) {
+            calendar_view.init(startDate, endDate).inMode(CalendarPickerView.SelectionMode.RANGE).withSelectedDates(selectedDates);
+        } else {
+            calendar_view.init(startDate, endDate).withSelectedDate(selectedDates.get(0)).inMode(CalendarPickerView.SelectionMode.RANGE);
+        }
         //当范围选择成功后才回调数据，返回两次的数据
         calendar_view.setOnRangeDateSelectedListener(new CalendarPickerView.OnRangeDateSelectedListener() {
             @Override

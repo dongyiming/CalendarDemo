@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,12 +20,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import cn.readsense.com.calendardemo.BindActivityCallBack;
 import cn.readsense.com.calendardemo.R;
 import cn.readsense.com.calendardemo.adapter.BaseStatePageAdapter;
 import cn.readsense.com.calendardemo.fragment.BaseCalendarFragment;
 import cn.readsense.com.calendardemo.fragment.EndFragment;
 import cn.readsense.com.calendardemo.fragment.StartFragment;
+import cn.readsense.com.calendardemo.service.BindActivityCallBack;
 import cn.readsense.com.calendardemo.utils.BarUtils;
 
 /**
@@ -38,15 +36,15 @@ import cn.readsense.com.calendardemo.utils.BarUtils;
  */
 public class MainActivity extends AppCompatActivity implements BindActivityCallBack<Date>, View.OnClickListener {
 
-    private TabLayout tablayout_top;
-    private String startTime;
     private String endTime;
+    private String startTime;
+    private ViewPager viewpager;
+    private TabLayout tablayout_top;
     @SuppressLint("UseSparseArrays")
     public static Map<Integer, BaseCalendarFragment> fragments = new HashMap<>();
-    private ViewPager viewpager;
 
     @Override
-    public void call(@NotNull List<? extends Date> list, int ref) {
+    public void call(List<Date> list, int ref) {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
@@ -83,8 +81,6 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
     /**
      * <!初始化参数和控件>
      *
-     * @param:
-     * @return:
      * @author: dongyiming
      * @date: 2018/9/25 21:49
      * @version: v1.0
@@ -112,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
     }
 
     /**
-     * <获取指定位置的fragment>
+     * <! 获取指定位置的fragment>
      *
      * @param: position
      * @return: BaseCalendarFragment
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
     }
 
     /**
-     * <！跳转startActivityForResult>
+     * <! 跳转startActivityForResult>
      *
      * @param:
      * @return:
@@ -163,6 +159,13 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
         }
     }
 
+    /**
+     * <! 返回到Activity>
+     *
+     * @author: dongyiming
+     * @date: 2018/9/29 12:45
+     * @version: v1.0
+     */
     public void setResult() {
 
         Intent intent = new Intent();
