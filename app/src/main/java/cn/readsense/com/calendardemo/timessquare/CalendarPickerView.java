@@ -600,11 +600,6 @@ public class CalendarPickerView extends ListView {
             if (cellClickInterceptor != null && cellClickInterceptor.onCellClicked(clickedDate)) {
                 return;
             }
-//            if (!betweenDates(clickedDate, minCal, maxCal) || !isDateSelectable(clickedDate)) {
-//                if (invalidDateListener != null) {
-//                    invalidDateListener.onInvalidDateSelected(clickedDate);
-//                }
-//            } else {
             boolean wasSelected = doSelectDate(clickedDate, cell);
 
             if (dateListener != null) {
@@ -614,7 +609,6 @@ public class CalendarPickerView extends ListView {
                     dateListener.onDateUnselected(clickedDate);
                 }
             }
-//            }
         }
     }
 
@@ -791,6 +785,7 @@ public class CalendarPickerView extends ListView {
                     for (List<MonthCellDescriptor> week : month) {
                         for (MonthCellDescriptor singleCell : week) {
                             if (singleCell.getDate().after(start)
+                                    && singleCell.getDate().before(end)
                                     && singleCell.isSelectable()) {
                                 singleCell.setSelected(true);
                                 singleCell.setRangeState(RangeState.MIDDLE);
