@@ -13,7 +13,7 @@ public interface BindActivityCallBack<T> {
     /**
      * <TODO>
      *
-     * @param:ref：0为左边时间
+     * @param: ref：0为左边时间
      * @author: dongyiming
      * @date: 2018/9/25 0:13
      * @version: v1.0

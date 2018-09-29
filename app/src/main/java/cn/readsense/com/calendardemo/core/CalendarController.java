@@ -78,5 +78,34 @@ public class CalendarController {
         Date endDate = endCalendar.getTime();
         calendarView.initTime(startDate, endDate, dates, isTimePeriod);
     }
+
+    /**
+     * <! 选择今年的前后十年的时间作为时间展示>
+     *
+     * @param: time
+     * @author: dongyiming
+     * @date: 2018/9/29 15:43
+     * @version: v1.0
+     */
+    public void initDate(String time) {
+
+        boolean isTimePeriod = false;
+        Calendar startCalendar = Calendar.getInstance();
+        Calendar endCalendar = Calendar.getInstance();
+        startCalendar.add(Calendar.YEAR, -10);
+        endCalendar.add(Calendar.YEAR, 10);
+        String[] arrayTime = time.split(" - ");
+        if (arrayTime.length == 1) {
+            Date date = TimeUtils.string2Date(arrayTime[0], simpleDateFormat);
+            dates.add(date);
+        } else {
+            Date startSelectedDate = TimeUtils.string2Date(arrayTime[0], simpleDateFormat);
+            Date endSelectedDate = TimeUtils.string2Date(arrayTime[1], simpleDateFormat);
+            dates.add(startSelectedDate);
+            dates.add(endSelectedDate);
+            isTimePeriod = true;
+        }
+        calendarView.initTime(startCalendar.getTime(), endCalendar.getTime(), dates, isTimePeriod);
+    }
 }
 

@@ -600,21 +600,21 @@ public class CalendarPickerView extends ListView {
             if (cellClickInterceptor != null && cellClickInterceptor.onCellClicked(clickedDate)) {
                 return;
             }
-            if (!betweenDates(clickedDate, minCal, maxCal) || !isDateSelectable(clickedDate)) {
-                if (invalidDateListener != null) {
-                    invalidDateListener.onInvalidDateSelected(clickedDate);
-                }
-            } else {
-                boolean wasSelected = doSelectDate(clickedDate, cell);
+//            if (!betweenDates(clickedDate, minCal, maxCal) || !isDateSelectable(clickedDate)) {
+//                if (invalidDateListener != null) {
+//                    invalidDateListener.onInvalidDateSelected(clickedDate);
+//                }
+//            } else {
+            boolean wasSelected = doSelectDate(clickedDate, cell);
 
-                if (dateListener != null) {
-                    if (wasSelected) {
-                        dateListener.onDateSelected(clickedDate);
-                    } else {
-                        dateListener.onDateUnselected(clickedDate);
-                    }
+            if (dateListener != null) {
+                if (wasSelected) {
+                    dateListener.onDateSelected(clickedDate);
+                } else {
+                    dateListener.onDateUnselected(clickedDate);
                 }
             }
+//            }
         }
     }
 
@@ -708,7 +708,7 @@ public class CalendarPickerView extends ListView {
         if (date == null) {
             throw new IllegalArgumentException("Selected date must be non-null.");
         }
-        if (date.before(minCal.getTime()) || date.after(maxCal.getTime())) {
+        if (date.before(minCal.getTime())) {
             throw new IllegalArgumentException(String.format(
                     "SelectedDate must be between minDate and maxDate."
                             + "%nminDate: %s%nmaxDate: %s%nselectedDate: %s", minCal.getTime(), maxCal.getTime(),
@@ -791,7 +791,6 @@ public class CalendarPickerView extends ListView {
                     for (List<MonthCellDescriptor> week : month) {
                         for (MonthCellDescriptor singleCell : week) {
                             if (singleCell.getDate().after(start)
-                                    && singleCell.getDate().before(end)
                                     && singleCell.isSelectable()) {
                                 singleCell.setSelected(true);
                                 singleCell.setRangeState(RangeState.MIDDLE);
@@ -1078,8 +1077,7 @@ public class CalendarPickerView extends ListView {
 
     static boolean betweenDates(Date date, Calendar minCal, Calendar maxCal) {
         final Date min = minCal.getTime();
-        return (date.equals(min) || date.after(min)) // >= minCal
-                && date.before(maxCal.getTime()); // && < maxCal
+        return (date.equals(min) || date.after(min));
     }
 
     private static boolean sameMonth(Calendar cal, MonthDescriptor month) {

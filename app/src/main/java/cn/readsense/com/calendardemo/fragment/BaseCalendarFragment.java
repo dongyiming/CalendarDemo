@@ -33,7 +33,7 @@ public abstract class BaseCalendarFragment extends Fragment implements CalendarV
         View view = inflater.inflate(R.layout.fragment_calendar, null);
         calendar_view = view.findViewById(R.id.calendar_view);
         CalendarController calendarController = new CalendarController(getActivity(), this);
-        calendarController.initTime(getCompareTime());
+        calendarController.initDate(getCompareTime());
         return view;
     }
 
