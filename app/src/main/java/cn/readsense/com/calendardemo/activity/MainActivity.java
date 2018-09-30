@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
     private String endTime;
     private String startTime;
     private ViewPager viewpager;
-    private TabLayout tablayout_top;
     @SuppressLint("UseSparseArrays")
     public static Map<Integer, BaseCalendarFragment> fragments = new HashMap<>();
+    private TextView[] tabView = new TextView[2];
+    private TabLayout tablayout_top;
 
     @Override
     public void call(List<Date> list, int ref) {
@@ -55,16 +56,16 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
                 stringBuilder.append(time);
             }
         }
-        TabLayout.Tab tabView = tablayout_top.getTabAt(ref);
+        TextView view = tabView[ref];
         if (ref == 0) {
             startTime = stringBuilder.toString();
             if (tabView != null)
-                tabView.setText(startTime);
+                view.setText(startTime);
             viewpager.setCurrentItem(1, false);
         } else {
             endTime = stringBuilder.toString();
             if (tabView != null)
-                tabView.setText(endTime);
+                view.setText(endTime);
             setResult();
         }
     }
@@ -92,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
 
         tablayout_top = findViewById(R.id.tablayout_top);
         viewpager = findViewById(R.id.viewpager);
-        ImageView backImg = findViewById(R.id.img_back);
-        backImg.setOnClickListener(this);
+        findViewById(R.id.img_back).setOnClickListener(this);
 
         String[] titles = new String[]{startTime, endTime};
         BaseStatePageAdapter mAdapter = new BaseStatePageAdapter(this.getSupportFragmentManager(), titles) {
@@ -105,6 +105,22 @@ public class MainActivity extends AppCompatActivity implements BindActivityCallB
         tablayout_top.setupWithViewPager(viewpager);
         tablayout_top.getTabAt(0);
         viewpager.setAdapter(mAdapter);
+        //设置自定义View
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            TabLayout.Tab itemView = tablayout_top.getTabAt(i);
+            if (itemView != null) {
+                itemView.setCustomView(R.layout.item_tablayout);
+                if (itemView.getCustomView() != null) {
+                    View timeValue = itemView.getCustomView().findViewById(R.id.txt_value);
+                    tabView[i] = (TextView) timeValue;
+                    if (i == 0) {
+                        tabView[0].setText(startTime);
+                    } else {
+                        tabView[1].setText(endTime);
+                    }
+                }
+            }
+        }
     }
 
     /**

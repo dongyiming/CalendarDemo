@@ -40,7 +40,31 @@
         app:tabIndicatorHeight="@dimen/dimen_indicator_height"
         app:tabSelectedTextColor="@color/color_time_value"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="@color/color_time_value" />
+        app:tabTextColor="@color/color_time_value">
+
+        <!--<cn.readsense.com.calendardemo.TabItemView
+            android:id="@+id/tabView_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:attr_time_type="指定时间"
+            app:attr_time_value="2017/08/09" />
+
+        <cn.readsense.com.calendardemo.TabItemView
+            android:id="@+id/tabView_time_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:attr_time_type="比对时间"
+            app:attr_time_value="2017/08/11" />-->
+        <!--<android.support.design.widget.TabItem
+            android:id="@+id/tabView_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabView_time_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
+    </android.support.design.widget.TabLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

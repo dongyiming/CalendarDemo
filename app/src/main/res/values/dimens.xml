@@ -16,6 +16,8 @@
     <dimen name="dimen_margin_top">9.6dp</dimen>
     <dimen name="dimen_margin_bottom">9.6dp</dimen>
     <dimen name="dimen_indicator_height">4dp</dimen>
+    <dimen name="dimen_type_size">10.7dp</dimen>
+    <dimen name="dimen_time_size">14.3dp</dimen>
 
     <!-- week-->
     <dimen name="dimen_week_height">30.7dp</dimen>

@@ -30,11 +30,12 @@ public abstract class BaseStatePageAdapter extends FragmentStatePagerAdapter {
         return titles.length;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-
-        return titles[position];
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//
+//        return titles[position];
+//    }
 
     public abstract Fragment getItemFragment(int position);
+
 }
